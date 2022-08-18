@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<body>
+    username : 
+    <input type="text" id="username">
+    password : 
+    <input type="password" id="password">
+    <button onclick="login()">Login</button>
+</body>
+<script>
+ function login() {
+    let user = {
+        username :  $('#username').val(),
+            password : $('#password').val()
+    }
+    $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/login',
+            data: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function (data) {
+                // console.log(data);
+                if(!data) {
+                    location.href = 'chuadangnhap.html';
+                } else {
+                    location.href = 'home.html';
+                    alert(`dang nhap ok`)
+                }
+                localStorage.setItem('accessToken', JSON.stringify(data));
+            }
+        })
+    
+ }
+</script>
+</html>
