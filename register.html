@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Đăng kí</h1>
+   name: <input type="text" id="name"><br>
+   username : <input type="text" id="username"><br>
+   password : <input type="password" id="password"><br>
+   address : <input type="text" id="address"><br>
+   phone : <input type="text" id="phone">  <br> 
+   <button onclick="register()"> Đăng kí</button>
+   <a href="../BE/login.html">Have you an Accout ?</a>
+</body>
+<script>
+ function register() {
+    let user = {
+        name :  $('#name1').val(),
+        username :  $('#username1').val(),
+        password :  $('#password1').val(),
+        address :  $('#address1').val(),
+        phone : $('#phone1').val()
+    }
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/register',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data : JSON.stringify(user),
+            success: function (data) {
+                // console.log(data);
+                    // location.href = 'login.html';
+                    alert(`Đăng kí thành công`)
+                // localStorage.setItem('accessToken', JSON.stringify(data));
+            }
+        })
+ }
+</script>
+</html>
